@@ -7,7 +7,7 @@ class RobotController(MycroftSkill):
 
     @intent_file_handler('controller.robot.intent')
     def handle_controller_robot(self, message):
-        direction_type = message.get('direction.type')
+        direction_type = message.data.get('direction.type')
         if direction_type is not None:
             self.move_direction(direction_type)
         else:
