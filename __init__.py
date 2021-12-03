@@ -1,6 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler
 try:
-    import RPi.GPIO as GPIO
+    import GPIO
     """This is trapped so you can still run without RPi.GPIO
     GPIO will be checked before use
     """
@@ -14,12 +14,7 @@ from time import sleep
 class RobotController(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-
-    def initialize(self):    
-        LED_GPIO = 4
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(LED_GPIO, GPIO.OUT)
-        GPIO.output(LED_GPIO, False)
+´´
 
     @intent_file_handler('controller.robot.intent')
     def handle_controller_robot(self, message):
@@ -36,25 +31,25 @@ class RobotController(MycroftSkill):
         if self.voc_match(direction, 'left'):
             # move left
             self.log.info("left")
-            GPIO.output(LED_GPIO, True)
+            GPIO.set("GPIO4","On")
             sleep(2)
             return True
         elif self.voc_match(direction, 'right'):
             # move right
             self.log.info("right")
-            GPIO.output(LED_GPIO, False)
+            GPIO.set("GPIO4","Off")
             sleep(2)
             return True
         elif self.voc_match(direction, 'forward'):
             # move forward
             self.log.info("forward")
-            GPIO.output(LED_GPIO, True)
+            GPIO.set("GPIO4","Off")
             sleep(2)
             return True
         elif self.voc_match(direction, 'backward'):
             # move backward
             self.log.info("backward")
-            GPIO.output(LED_GPIO, True)
+            GPIO.set("GPIO4","On")
             sleep(2)
             return True 
         else:
