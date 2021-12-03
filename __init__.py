@@ -1,9 +1,16 @@
 from mycroft import MycroftSkill, intent_file_handler
+import RPi.GPIO as GPIO
 
 
 class RobotController(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
+
+    def initialize(self):    
+        LED_GPIO = 4
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(LED_GPIO, GPIO.OUT)
+        GPIO.output(LED_GPIO, False)
 
     @intent_file_handler('controller.robot.intent')
     def handle_controller_robot(self, message):
@@ -20,21 +27,30 @@ class RobotController(MycroftSkill):
         if self.voc_match(direction, 'left'):
             # move left
             self.log.info("left")
+            GPIO.output(LED_GPIO, True)
             return True
         elif self.voc_match(direction, 'right'):
             # move right
             self.log.info("right")
+            GPIO.output(LED_GPIO, True)
             return True
         elif self.voc_match(direction, 'forward'):
             # move forward
             self.log.info("forward")
+            GPIO.output(LED_GPIO, True)
             return True
         elif self.voc_match(direction, 'backward'):
             # move backward
             self.log.info("backward")
+            GPIO.output(LED_GPIO, True)
             return True 
         else:
             return False
+
+def stop(self):
+    #stop moving
+    self.log.info("stopping")
+    GPIO.output(LED_GPIO, False)
 
 def create_skill():
     return RobotController()
