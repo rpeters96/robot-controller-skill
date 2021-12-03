@@ -7,7 +7,7 @@
 # dependencies:
 #   # Pip dependencies on PyPI
    python:
-      - GPIO
+      - RPi.GPIO
 #     - requests
 #     - gensim
 #
