@@ -14,7 +14,6 @@ from time import sleep
 class RobotController(MycroftSkill):
     def __init__(self):
         MycroftSkill.__init__(self)
-´´
 
     @intent_file_handler('controller.robot.intent')
     def handle_controller_robot(self, message):
@@ -58,7 +57,7 @@ class RobotController(MycroftSkill):
 def stop(self):
     #stop moving
     self.log.info("stopping")
-    GPIO.output(LED_GPIO, False)
+    GPIO.set("GPIO4","Off")
 
 def create_skill():
     return RobotController()
